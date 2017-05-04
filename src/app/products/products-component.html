@@ -1,0 +1,42 @@
+<div class="products">
+    <div class="row">
+        <div class="col-xs-12 product-filter">
+            <span class="filter-headline">Filter:</span>
+            <div class="badge single-filter" ng-class="'bg-' + product.type"
+                 ng-repeat="product in $ctrl.products | unique:'type'">
+                <label for="{{product.type}}" class="checkbox-inline">
+                    <input type="checkbox" ng-click="$ctrl.hideProducts(product.type)"
+                           value="{{product.type}}" id="{{product.type}}" ng-model="products[$index]"
+                           ng-checked="true"/>
+                    {{product.type | capitalize}}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="product in $ctrl.products" ng-hide="product.hide">
+            <article class="product" itemscope itemtype="https://schema.org/Product">
+                <div class="product-top">
+                    <img src="../images/placeholder.png" class="img-responsive" itemprop="image"
+                         alt="In this picture you can see a {{product.title}}"/></div>
+                <div class="product-bottom">
+                    <div class="product-headline" itemprop="name">
+                        {{product.title}}
+                        <span class="badge pull-right" ng-class="'bg-' + product.type" itemprop="category">
+                            {{product.type | capitalize}}
+                        </span>
+                    </div>
+                    <div class="product-description">
+                        <p itemprop="description">{{product.description}}</p>
+                    </div>
+                    <div class="product-anchor">
+                        <a href="#" itemprop="url" title="More info about the product {{product.title}}">
+                            <span ng-class="'color-' + product.type">&#10095;</span>
+                            More info
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
